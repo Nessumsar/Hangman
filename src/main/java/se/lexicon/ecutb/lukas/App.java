@@ -6,17 +6,21 @@ package se.lexicon.ecutb.lukas;
  */
 public class App 
 {
+
+
     public static void main( String[] args ) {
+        String[] words = {"hacker", "formidable", "machine", "rain", "water" };
+        String secretWord = words[(int) (Math.random() * words.length)];
         System.out.println("Welcome to Hangman. Make a guess consisting of a character or the whole word. You got 8 guesses.");
         boolean keepAlive = true;
-        Methods game = new Methods();
-        game.setupGuessArray();
+
+        HangMan game = new HangMan(secretWord); //lägg allt i hangman?
         do {
-            game.HangMan();
+            game.run();
 
             //////////////
             System.out.println("Do you want to quit? Press Y to quit, press any key to continue.");
-            switch(Methods.getString().trim().toLowerCase()){
+            switch(HangMan.getString().trim().toLowerCase()){
                 case "y":
                     keepAlive = false;
                     System.out.println("Bye!");
@@ -25,4 +29,6 @@ public class App
         }while(keepAlive);
 
     }
+
+
 }
