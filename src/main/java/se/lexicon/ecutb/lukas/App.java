@@ -1,9 +1,6 @@
 package se.lexicon.ecutb.lukas;
 
-/**
- * Hello world!
- *
- */
+
 public class App 
 {
 
@@ -12,8 +9,8 @@ public class App
         String[] words = {"hacker", "formidable", "machine", "rain", "water" };
         String secretWord = words[(int) (Math.random() * words.length)];
         System.out.println("Welcome to Hangman. Make a guess consisting of a character or the whole word. You got 8 guesses.");
-        boolean keepAlive = true;
         HangMan game = new HangMan(secretWord);
+        boolean keepAlive;
         do {
             game.run();
             keepAlive = game.continuePlaying();

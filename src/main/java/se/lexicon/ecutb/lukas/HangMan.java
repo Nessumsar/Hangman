@@ -6,15 +6,14 @@ public class HangMan {
     private String secretWord;
     private int guessAmount;
     private static Scanner sc = new Scanner(System.in);
-    private char guessarray[];
-    private StringBuilder sb;
-    private StringBuilder madeGuesses = new StringBuilder();
+    private char[] guessArray;
+    private StringBuilder madeGuesses;
     private boolean winner = false;
 
     public HangMan(String secretWord){
         this.secretWord = secretWord;
-        sb = new StringBuilder();
-        guessarray = new char[secretWord.length()];
+        madeGuesses = new StringBuilder();
+        guessArray = new char[secretWord.length()];
         setupGuessArray();
 
     }
@@ -33,13 +32,17 @@ public class HangMan {
     public void setupGuessArray(){
         for (int i=0; i<secretWord.length(); i++)
         {
-            guessarray[i] = '_';
+            guessArray[i] = '_';
         }
     }
 
     public StringBuilder saveGuessToSb(String guess){
-        sb.append(guess);
-        return sb;
+        if (guess.length() == 1){
+            madeGuesses.append(guess);
+        } else if(guess.length() == secretWord.length()){
+            madeGuesses.append(guess);
+        }
+        return madeGuesses;
     }
 
     public void setMadeGuesses(StringBuilder madeGuesses) {
@@ -50,7 +53,7 @@ public class HangMan {
         if (secretWord.equalsIgnoreCase(guess)){
             winner = true;
         }
-        String winners = new String(guessarray);
+        String winners = new String(guessArray);
         if (winners.equalsIgnoreCase(secretWord)){
             winner = true;
         }
@@ -59,26 +62,32 @@ public class HangMan {
     }
 
     public char saveValid (String guess){
-        int index = secretWord.indexOf(guess);
-        char convertedGuess = guess.charAt(0);
-        if (guess.length() ==1 ){
-            guessarray[index] = convertedGuess;
-            for (int i=0; i<guessarray.length; i++){
-                System.out.print(guessarray[i]);
-            }
+        int index = 0;
+        if(secretWord.contains(guess)){
+            index = secretWord.indexOf(guess);
+            char convertedGuess = guess.charAt(0);
+            if (guess.length() ==1 ){
+                guessArray[index] = convertedGuess;
+                for (int i=0; i<guessArray.length; i++){
+                    System.out.print(guessArray[i]);
+                }
         }
-        return convertedGuess;
+        }
+        return guessArray[index];
     }
 
     public boolean checkValid (String guess) {
         boolean valid = false;
-        if (secretWord.contains(guess)){
+        if (guess.length() == 0 || (guess.length() > 1 && guess.length()<secretWord.length())){
+            System.out.println("Letter not found");
+        }
+        if (secretWord.contains(guess) && guess.length() == 1){
             System.out.println("Correct!");
             saveValid(guess);
             System.out.println("");
             valid = true;
         }
-        else if (!secretWord.equalsIgnoreCase(guess)){
+        else if (!secretWord.equalsIgnoreCase(guess)) {
             System.out.println("Wrong guess.");
         }
         return valid;
