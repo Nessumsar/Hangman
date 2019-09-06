@@ -13,12 +13,12 @@ public class AppTest
     String[] words = {"hacker", "formidable", "machine", "rain", "water" };
     String secretWord = words[(int) (Math.random() * words.length)];
         String guess = "a";
-        boolean sann = true;
+        String guessword = "hacker"; //användes för att prova checkwin, test failar när testet slumpar hacker som ska ge true
         HangMan game = new HangMan(secretWord);
 
         @Test
         public void checkValid(){
-            Assert.assertEquals(sann, secretWord.contains(guess));
+            Assert.assertEquals(true, secretWord.contains(guess));
         }
 
         @Test

@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 public class HangMan {
     private String secretWord;
-    private int maxGuesses = 8;
     private int guessAmount;
     private static Scanner sc = new Scanner(System.in);
     private char guessarray[];
@@ -17,8 +16,8 @@ public class HangMan {
         sb = new StringBuilder();
         guessarray = new char[secretWord.length()];
         setupGuessArray();
-    }
 
+    }
 
     public int setGuessAmount(int guessAmount) {
         guessAmount++;
@@ -62,9 +61,11 @@ public class HangMan {
     public char saveValid (String guess){
         int index = secretWord.indexOf(guess);
         char convertedGuess = guess.charAt(0);
-        guessarray[index] = convertedGuess;
-        for (int i=0; i<guessarray.length; i++){
-            System.out.print(guessarray[i]);
+        if (guess.length() ==1 ){
+            guessarray[index] = convertedGuess;
+            for (int i=0; i<guessarray.length; i++){
+                System.out.print(guessarray[i]);
+            }
         }
         return convertedGuess;
     }
@@ -97,26 +98,35 @@ public class HangMan {
             }
         }
     }
-    public void presentera(){
-        System.out.println("Make a guess. The word is " + secretWord.length() + " characters long.");
-        System.out.println("Guess " + getGuessAmount(guessAmount) + "/8");
-    }
 
-    public boolean run() {
-        boolean done = false;
+    public void run() {
+
         while (!winner && getGuessAmount(guessAmount) != 8) {
-            presentera();
+            System.out.println("Make a guess. The word is " + secretWord.length() + " characters long.");
+            System.out.println("Guess " + getGuessAmount(guessAmount) + "/8");
             String guess = getString();
             sparagissning(guess);
             if (checkWin(guess)){
                 System.out.println("You win! The word was "+secretWord);
-                done = true;
+                break;
             }
             setMadeGuesses(saveGuessToSb(guess));
             System.out.println("Your guesses: " + madeGuesses);
             break;
         }
-        return done;
+
+    }
+
+    public boolean continuePlaying(){
+        boolean continues = true;
+        System.out.println("Do you want to quit? Press Y to quit, press any key to continue.");
+        switch(HangMan.getString().trim().toLowerCase()){
+            case "y":
+                continues = false;
+                System.out.println("Bye!");
+                break;
+        }
+        return continues;
     }
 
 }
