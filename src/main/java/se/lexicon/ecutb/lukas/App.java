@@ -1,10 +1,7 @@
 package se.lexicon.ecutb.lukas;
 
-
 public class App 
 {
-
-
     public static void main( String[] args ) {
         String[] words = {"hacker", "formidable", "machine", "rain", "water" };
         String secretWord = words[(int) (Math.random() * words.length)];
