@@ -1,9 +1,5 @@
 package se.lexicon.ecutb.lukas;
 
-/**
- * Hello world!
- *
- */
 public class App 
 {
 
