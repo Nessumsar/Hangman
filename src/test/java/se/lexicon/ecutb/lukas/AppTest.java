@@ -7,12 +7,12 @@ public class AppTest
         String guess = "a"; //om guess innehåller mer än 1 bokstav blir checkvalid felaktig
         String invalidGuess = "ab";
         String wrongGuess = "q";
-        String guessword = "hacker";//användes för att prova checkwin, test failar när testet slumpar hacker som ska ge true
+        String guessword = "hacker";
         String wrongWord = "cow";
         HangMan game = new HangMan(guessword);
 
         @Test
-        public void checkValid(){
+        public void checkValidTrue(){
         boolean valid = game.checkValid(guess);
         Assert.assertEquals(true, valid);
         //Returnar true pga a finns i ordet hacker.
