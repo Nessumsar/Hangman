@@ -1,5 +1,4 @@
 package se.lexicon.ecutb.lukas;
-
 public class App 
 {
     public static void main( String[] args ) {

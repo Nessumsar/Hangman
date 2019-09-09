@@ -108,21 +108,24 @@ public class HangMan {
     }
 
     public void run() {
-
-        while (!winner && getGuessAmount(guessAmount) != 8) {
+        while (!winner && guessAmount != 8) {
             System.out.println("Make a guess. The word is " + secretWord.length() + " characters long.");
-            System.out.println("Guess " + getGuessAmount(guessAmount) + "/8");
+            System.out.println("Guess " + guessAmount + "/8");
             String guess = getString();
             sparagissning(guess);
             if (checkWin(guess)){
                 System.out.println("You win! The word was "+secretWord);
                 break;
+            } if (guessAmount == 8){
+                System.out.println("You lose.");
+                break;
             }
             setMadeGuesses(saveGuessToSb(guess));
             System.out.println("Your guesses: " + madeGuesses);
-            break;
-        }
 
+
+        } //förlust
+            //fortsätta spela med nytt ord?
     }
 
     public boolean continuePlaying(){
@@ -135,6 +138,5 @@ public class HangMan {
                 break;
         }
         return continues;
-    }
-
+    }  // slumpa nytt ord om man ej vill avsluta
 }
