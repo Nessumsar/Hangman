@@ -1,62 +1,21 @@
-package se.ecutb.lukas;
+package se.lexicon.ecutb.lukas;
 import java.util.Scanner;
-/**
- * Hangman
- * Grunder att bygga på
- */
-public class App 
-{
-    public static void main( String[] args ) {
-        System.out.println("Välkommen till HangMan. Regler: Du har 8 gissningar. Du kan gissa på en bokstav eller hela ordet.");
-        boolean keepAlive = true;
+public class App {
+    private static Scanner sc = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        boolean win = false;
+        String[] words = {"hacker", "formidable", "machine", "rain", "water"};
+        String secretWord = words[(int) (Math.random() * words.length)];
+        System.out.println("Welcome to Hangman. Make a guess consisting of a character or the whole word. You got 8 guesses.");
+        HangMan game = new HangMan(secretWord);
         do {
-            HangMan game = new HangMan("ska ändras");
-            UserInterface session = new UserInterface(game);
-            session.run();
-            //////////////
-            System.out.println("Do you want to quit? (Y/N)");
-            switch(UserInput.getString().trim().toLowerCase()){
-                case "y":
-                    keepAlive = false;
-                    System.out.println("Bye!");
-                    break;
-            }
-        }while(keepAlive);
-
+            System.out.println("Make a guess. The word is " + secretWord.length() + " characters long.");
+            String guess = sc.nextLine();
+           char[] temparray = game.run(guess);
+           if(temparray.equals(secretWord)){
+               win = true;
+           }
+        } while (!win);
     }
-
-    public static char[] stringToChar(){
-        String testString = "abcdefghijklmnopqrstuvwxyzåäö";
-        char[] stringToCharArray = testString.toCharArray();
-        return stringToCharArray;
-    }
-    public static String gissning (String input) {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Gissa en bokstav.");
-        if (sc.hasNextInt()){
-            System.out.println("Det är ingen bokstav. Du skrev "+sc.nextInt());
-        } else
-            input = sc.nextLine();
-        return input;
-    }
-    }
-
-/*
- System.out.println(stringToChar());
-        String a = "";
-        Scanner sc = new Scanner(System.in);
-        int maxGuess = 8;
-        int guessNumber = 0;
-        String secretWord = "klasskampen";
-        String stringGuesses[] = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","å","ä","ö"};
-
-        boolean spela = true;
-        while(spela){
-            String madeGuess = gissning(a);
-            System.out.println(madeGuess);
-            if(guessNumber == maxGuess){
-                System.out.println("Du förlorade.");
-                        break;
-            }
-        } //whileslut
- */
+}
