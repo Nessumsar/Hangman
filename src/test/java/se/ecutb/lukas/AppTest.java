@@ -6,10 +6,9 @@ import java.util.Arrays;
 
 public class AppTest 
 {
-        String guess = "a"; //om guess innehåller mer än 1 bokstav blir checkvalid felaktig
-        String invalidGuess = "b";
+        String guess = "a";
         String wrongGuess = "q";
-        String guessword = "hacker";//användes för att prova checkwin, test failar när testet slumpar hacker som ska ge true
+        String guessword = "hacker";
         String wrongWord = "packer";
         HangMan game = new HangMan(guessword);
 
@@ -42,7 +41,8 @@ public class AppTest
         char[] testchar = new char [5];
         testchar = game.run("hacker"); //Act
         String temp = Arrays.toString(testchar);
-        Assert.assertEquals("You win! The word was hacker", temp);
+        Assert.assertEquals("[h, a, c, k, e, r]", temp);
         //Testar om run returnerar rätt ord vid gissning på rätt ord
     }
 }
+
