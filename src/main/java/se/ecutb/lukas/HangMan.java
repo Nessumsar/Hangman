@@ -1,12 +1,11 @@
 package se.lexicon.ecutb.lukas;
-import java.util.Scanner;
 public class HangMan {
     private String secretWord;
     private int guessAmount = 1;
-    private static Scanner sc = new Scanner(System.in);
     private char[] guessArray;
     private StringBuilder madeGuesses;
     private boolean winner = false;
+    boolean valid = false;
 
     public HangMan(String secretWord){
         this.secretWord = secretWord;
@@ -15,7 +14,9 @@ public class HangMan {
         setupArray();
     }
 
-    public void setupArray(){ for (int i=0; i<secretWord.length(); i++) {  guessArray[i] = '_'; } }
+    public void setupArray(){
+        for (int i=0; i<secretWord.length(); i++) {  guessArray[i] = '_'; }
+    }
 
     public char[] run(String guess) {
         while (!winner && guessAmount != 9) {
@@ -24,7 +25,6 @@ public class HangMan {
             if (temp.contains(guess)) {
                 System.out.println("You've already guessed " + guess);
             } else if (!temp.contains(guess)) {
-                boolean valid = false;
                 int index = 0;
                 if ((guess.length() > 1 && guess.length()<secretWord.length())){
                  System.out.println("Letter not found. To guess a word, please guess a word of the same length as the secret word."); }
